@@ -26,11 +26,12 @@ Deadline do przesłania rozwiązań to 23.10.2023 godz. 21:37. Po tym terminie z
 
 ## Setup repozytorium
 1. Utwórz forka tego repozytorium w swoim profilu ([how to fork a repo](https://docs.github.com/en/get-started/quickstart/fork-a-repo)). Wszystkie zmiany powinny być komitowane na forka, a nie do orginalnego repo.
-2. Sklonuj swoje repozytorium
+   **Uwaga:** zmień widoczność swojego repozytorium na prywatne! Znajdziesz tę opcję na dole ustawień repo!
+3. Sklonuj swoje repozytorium
     ```bash
-    git clone ${nazwa_repo}
+    git clone ${adres_repo}
     ```
-3. Stwórz folder `build` wewnątrz sklonowanego repo
+4. Stwórz folder `build` wewnątrz sklonowanego repo
     ```bash
     mkdir build
     ```
