@@ -1,6 +1,9 @@
 #include <vector>
 #include <string>
 
+#include <stdexcept>
+#include <algorithm>
+
 struct Member
 {
     std::string name;
@@ -14,6 +17,40 @@ struct Member
 class AGHRacingTeam
 {
 public:
+    AGHRacingTeam(){}
+
+    AGHRacingTeam(const std::vector<Member>& newMembers) {
+        for (const auto& member : newMembers) {
+            if (isValidMember(member)) {
+                members.push_back(member);
+            }
+        }
+    }
+
+    bool isValidMember(const Member& member){
+        bool shouldAdd = true;
+        if (!(typeid(member.height) == typeid(int) && typeid(member.yearOfJoining) == typeid(int) && typeid(member.name) == typeid(std::string))) {  // && !name.empty()
+            throw std::invalid_argument("Invalid input data. Check data types and non-empty string.");
+        }
+        if(!(100 <= member.height && member.height <= 250)) {
+            shouldAdd = false;
+        }
+        if(!(2000 <= member.yearOfJoining && member.yearOfJoining <= 2023)){
+            shouldAdd = false;
+        }
+        if(member.name.length() >= 20){
+            shouldAdd = false;
+        }
+        if(!std::isupper(member.name[0])){
+            shouldAdd = false;
+        }
+        if (!std::all_of(member.name.begin(), member.name.end(), ::isalnum)) {
+            shouldAdd = false;
+        }
+
+        return shouldAdd;
+    }
+
     std::vector<Member> getMembers() { return members; }
 
     /**

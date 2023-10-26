@@ -3,9 +3,7 @@
 #include <string>
 #include <cctype>
 #include <algorithm>
-#include <typeinfo>
 #include <stdexcept>
-#include <iostream>
 #include <map>
 
 void AGHRacingTeam::addMember(std::string name, int height, int yearOfJoining)
