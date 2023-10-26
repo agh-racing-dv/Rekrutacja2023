@@ -52,8 +52,13 @@ std::vector<std::string> AGHRacingTeam::getMembersSortedByHeightAsc()
 
 int AGHRacingTeam::getNumberOfMembersWhoJoinedInLeapYear()
 {
-    // add your code here
-    return 0;
+    int leapJoinCounter = 1;
+    for (const auto &member : members) {
+        if(member.yearOfJoining % 4 == 0){
+            leapJoinCounter+=1;
+        }
+    }
+    return leapJoinCounter;
 }
 
 int AGHRacingTeam::getMaxNumberOfJoinedInTheSameYear()
