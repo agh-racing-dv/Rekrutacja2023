@@ -5,11 +5,13 @@
 #include <algorithm>
 #include <typeinfo>
 #include <stdexcept>
+#include <iostream>
+#include <map>
 
 void AGHRacingTeam::addMember(std::string name, int height, int yearOfJoining)
 {
     bool shouldAdd = true;
-    if (!(typeid(height) == typeid(int) && typeid(yearOfJoining) == typeid(int) && typeid(name) == typeid(std::string) && !name.empty())) {
+    if (!(typeid(height) == typeid(int) && typeid(yearOfJoining) == typeid(int) && typeid(name) == typeid(std::string))) {  // && !name.empty()
         throw std::invalid_argument("Invalid input data. Check data types and non-empty string.");
     }
     if(!(100 <= height && height <= 250)) {
@@ -35,6 +37,9 @@ void AGHRacingTeam::addMember(std::string name, int height, int yearOfJoining)
 
 std::vector<std::string> AGHRacingTeam::getMembersSortedByHeightAsc()
 {
+    if(members.empty()){
+        throw std::runtime_error("No members in the team");
+    }
     std::vector<std::pair<int, std::string>> temp; // aka #include <map>, & not coping elements
     for (const auto &member : members) {
         temp.emplace_back(member.height, member.name);
@@ -52,6 +57,9 @@ std::vector<std::string> AGHRacingTeam::getMembersSortedByHeightAsc()
 
 int AGHRacingTeam::getNumberOfMembersWhoJoinedInLeapYear()
 {
+    if(members.empty()){
+        throw std::runtime_error("No members in the team");
+    }
     int leapJoinCounter = 1;
     for (const auto &member : members) {
         if(member.yearOfJoining % 4 == 0){
@@ -63,6 +71,25 @@ int AGHRacingTeam::getNumberOfMembersWhoJoinedInLeapYear()
 
 int AGHRacingTeam::getMaxNumberOfJoinedInTheSameYear()
 {
-    // add your code here
-    return 0;
+    if(members.empty()){
+        throw std::runtime_error("No members in the team");
+    }
+
+    std::map<int, int> yearNOJoins;
+    int counter = 1;
+    for (const auto &member : members) {
+        std::cout << "Name: " << member.name << ", Year of Joining: " << member.yearOfJoining << std::endl;
+        yearNOJoins[member.yearOfJoining]++;
+        counter ++;
+    }
+    std::cout << "len(members) = " << counter;
+
+    int maxValue = 0;
+    for (const auto &yearJoinsPairs : yearNOJoins) {
+        if (yearJoinsPairs.second > maxValue) {
+            maxValue = yearJoinsPairs.second;
+        }
+    }
+
+    return maxValue;
 }
