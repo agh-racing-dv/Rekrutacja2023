@@ -17,7 +17,7 @@ void AGHRacingTeam::addMember(std::string name, int height, int yearOfJoining)
     if(!(100 <= height && height <= 250)) {
         shouldAdd = false;
     }
-    if(!(2000 < yearOfJoining && yearOfJoining <= 2023)){
+    if(!(2000 <= yearOfJoining && yearOfJoining <= 2023)){
         shouldAdd = false;
     }
     if(name.length() >= 20){
@@ -60,10 +60,10 @@ int AGHRacingTeam::getNumberOfMembersWhoJoinedInLeapYear()
     if(members.empty()){
         throw std::runtime_error("No members in the team");
     }
-    int leapJoinCounter = 1;
+    int leapJoinCounter = 0;
     for (const auto &member : members) {
         if(member.yearOfJoining % 4 == 0){
-            leapJoinCounter+=1;
+            leapJoinCounter++;
         }
     }
     return leapJoinCounter;
@@ -76,13 +76,9 @@ int AGHRacingTeam::getMaxNumberOfJoinedInTheSameYear()
     }
 
     std::map<int, int> yearNOJoins;
-    int counter = 1;
     for (const auto &member : members) {
-        std::cout << "Name: " << member.name << ", Year of Joining: " << member.yearOfJoining << std::endl;
         yearNOJoins[member.yearOfJoining]++;
-        counter ++;
     }
-    std::cout << "len(members) = " << counter;
 
     int maxValue = 0;
     for (const auto &yearJoinsPairs : yearNOJoins) {
