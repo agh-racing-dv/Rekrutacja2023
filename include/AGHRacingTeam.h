@@ -8,6 +8,7 @@ struct Member
     int yearOfJoining;
 
     Member(std::string name, int height, int yearOfJoining) : name(name), height(height), yearOfJoining(yearOfJoining){};
+
 };
 
 class AGHRacingTeam
