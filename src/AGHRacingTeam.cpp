@@ -35,8 +35,19 @@ void AGHRacingTeam::addMember(std::string name, int height, int yearOfJoining)
 
 std::vector<std::string> AGHRacingTeam::getMembersSortedByHeightAsc()
 {
-    // add your code here
-    return std::vector<std::string>();
+    std::vector<std::pair<int, std::string>> temp; // aka #include <map>, & not coping elements
+    for (const auto &member : members) {
+        temp.emplace_back(member.height, member.name);
+    }
+
+    std::sort(temp.begin(), temp.end());
+
+    std::vector<std::string> sortedNames;
+    for (const auto &item : temp) {
+        sortedNames.push_back(item.second);
+    }
+
+    return sortedNames;
 }
 
 int AGHRacingTeam::getNumberOfMembersWhoJoinedInLeapYear()
